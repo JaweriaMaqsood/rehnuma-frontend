@@ -4677,7 +4677,7 @@ async function openAdminPayments() {
       smsBox.innerHTML = '';
       if (!dd.hookOn) { smsBox.textContent = 'SMS auto-approve abhi band hai (Railway mein PAYMENT_HOOK_SECRET set nahi).'; return; }
       if (!(dd.items || []).length) { smsBox.textContent = 'Abhi koi SMS nahi aaya.'; return; }
-      dd.items.forEach((m) => { const r = document.createElement('div'); r.textContent = (m.trx_id ? 'TID ' + m.trx_id + ' · Rs ' + m.amount : 'Samajh nahi aaya') + (m.used && m.trx_id ? ' · use ho gaya' : ''); r.setAttribute('data-no-i18n', ''); smsBox.appendChild(r); });
+      dd.items.forEach((m) => { const r = document.createElement('div'); r.textContent = (m.trx_id ? 'TID ' + m.trx_id + ' · Rs ' + m.amount : 'Samajh nahi aaya: ' + (m.snippet || '')) + (m.used && m.trx_id ? ' · use ho gaya' : ''); r.setAttribute('data-no-i18n', ''); smsBox.appendChild(r); });
     } catch (e) { smsBox.textContent = ''; }
   })();
   const act = document.createElement('div'); act.className = 'nt-actions';
