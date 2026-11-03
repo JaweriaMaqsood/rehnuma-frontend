@@ -1464,7 +1464,7 @@ h1,h2,h3,h4{ font-family:var(--font-body) !important; letter-spacing:-.02em; }
 #authOverlay .au-head b { display:block; font-size:15px; line-height:1.3; color:var(--text); }
 #authOverlay .au-head span { display:block; font-size:12.5px; color:var(--text-dim); margin-top:2px; }
 #authOverlay #authLoggedOutView, #authOverlay #authLoggedInView { padding:18px 22px 24px; }
-#authOverlay #authCloseBtn { top:14px !important; right:14px !important; width:30px; height:30px; border-radius:50% !important; display:grid; place-items:center; background:rgba(255,255,255,.08) !important; font-size:15px !important; padding:0 !important; }
+#authOverlay #authCloseBtn { z-index:5; top:14px !important; right:14px !important; width:30px; height:30px; border-radius:50% !important; display:grid; place-items:center; background:rgba(255,255,255,.08) !important; font-size:15px !important; padding:0 !important; }
 #authOverlay #authLoggedOutView > div:first-child { border-radius:999px !important; padding:4px !important; margin-bottom:16px !important; }
 #authOverlay .auth-tab { border-radius:999px !important; padding:9px !important; }
 #authOverlay #authFormTitle { font-size:17px !important; margin-bottom:14px !important; }
@@ -1486,9 +1486,30 @@ h1,h2,h3,h4{ font-family:var(--font-body) !important; letter-spacing:-.02em; }
 #authOverlay .otp-link { background:none; border:none; color:var(--cyan); font-size:12.5px; font-weight:600; cursor:pointer; padding:4px 2px; }
 #authOverlay .otp-link:disabled { color:var(--text-faint); cursor:default; }
 </style>
+<style>
+/* ---- Desktop: sliding login / signup card ---- */
+#authOverlay .au-slide { display:none; }
+@media (min-width: 760px) {
+  #authOverlay #auCard.au-wide { max-width:800px !important; min-height:500px; }
+  #authOverlay #auCard.au-wide .au-head { display:none; }
+  #authOverlay #auCard.au-wide #authLoggedOutView { width:55%; box-sizing:border-box; margin-left:0; min-height:500px; padding:34px 38px; display:flex !important; flex-direction:column; justify-content:center; transition:margin-left .6s cubic-bezier(.65,0,.35,1); }
+  #authOverlay #auCard.au-wide.au-signup #authLoggedOutView { margin-left:45%; }
+  #authOverlay #auCard.au-wide #authLoggedOutView > div:first-child { display:none !important; }
+  #authOverlay #auCard.au-wide #authFormTitle { font-size:22px !important; text-align:center; margin-bottom:16px !important; }
+  #authOverlay #auCard.au-wide .au-slide { display:block; position:absolute; top:0; bottom:0; width:45%; left:55%; z-index:2; background:var(--grad); border-radius:110px 0 0 110px; transition:left .6s cubic-bezier(.65,0,.35,1), border-radius .6s cubic-bezier(.65,0,.35,1); overflow:hidden; }
+  #authOverlay #auCard.au-wide.au-signup .au-slide { left:0; border-radius:0 110px 110px 0; }
+  #authOverlay #auCard.au-wide .au-slide::before { content:""; position:absolute; inset:0; background:radial-gradient(circle at 30% 20%, rgba(255,255,255,.28), transparent 55%); }
+  #authOverlay .au-slide-in { position:relative; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:0 34px; color:#170D30; }
+  #authOverlay .au-slide-in img { border-radius:50%; margin-bottom:12px; box-shadow:0 6px 18px rgba(0,0,0,.25); }
+  #authOverlay .au-slide-in h3 { font-size:26px; margin:0 0 8px; color:#170D30; }
+  #authOverlay .au-slide-in p { font-size:14px; line-height:1.55; margin:0 0 18px; color:#2a1650; }
+  #authOverlay .au-slide-in button { border:2px solid #170D30; background:rgba(255,255,255,.25); color:#170D30; border-radius:999px; padding:9px 34px; font-size:13px; font-weight:800; letter-spacing:.5px; text-transform:uppercase; cursor:pointer; }
+  #authOverlay .au-slide-in button:hover { background:#170D30; color:#fff; }
+}
+</style>
 <!-- ============================= AUTH MODAL ============================= -->
 <div id="authOverlay" style="display:none; position:fixed; inset:0; z-index:200; background:rgba(10,5,25,0.7); backdrop-filter:blur(4px); align-items:center; justify-content:center; padding:20px;">
-  <div style="width:100%; max-width:400px; background:var(--surface); border:1.6px solid var(--border-strong); border-radius:var(--radius-lg); box-shadow:var(--shadow-lg); padding:32px 28px; position:relative;">
+  <div id="auCard" class="au-wide" style="width:100%; max-width:400px; background:var(--surface); border:1.6px solid var(--border-strong); border-radius:var(--radius-lg); box-shadow:var(--shadow-lg); padding:32px 28px; position:relative;">
     <button type="button" id="authCloseBtn" aria-label="Close" style="position:absolute; top:16px; right:16px; background:none; border:none; color:var(--text-faint); font-size:22px; line-height:1; padding:4px;">✕</button>
     <div class="au-head" id="auHead"><img src="/icon-192.png" alt="" width="46" height="46"><div><b>Khush aamdeed! 🌸</b><span>Pehle 3 din free, koi card nahi</span></div></div>
 
@@ -1559,6 +1580,8 @@ h1,h2,h3,h4{ font-family:var(--font-body) !important; letter-spacing:-.02em; }
         <div class="otp-row"><button type="button" id="otpResend" class="otp-link">Code dobara bhejein</button><button type="button" id="otpBack" class="otp-link">Wapas</button></div>
       </div>
     </div>
+
+    <div class="au-slide" id="auSlide"><div class="au-slide-in"><img src="/icon-192.png" alt="" width="56" height="56"><h3 id="auSlideTitle">Naye ho?</h3><p id="auSlideText">Free account banayein aur 3 din saari cheezein free use karein.</p><button type="button" id="auSlideBtn">Sign up</button></div></div>
 
     <div id="authLoggedInView" style="display:none; text-align:center;">
       <div style="width:56px; height:56px; border-radius:50%; background:var(--grad); display:grid; place-items:center; margin:0 auto 16px; font-family:var(--font-display); font-weight:700; font-size:20px; color:#170D30;" id="authAvatarInitial">S</div>
@@ -3476,8 +3499,15 @@ if (authOpenBtnMobile) authOpenBtnMobile.addEventListener('click', openAuthModal
 authCloseBtn.addEventListener('click', closeAuthModal);
 authOverlay.addEventListener('click', (e) => { if (e.target === authOverlay) closeAuthModal(); });
 
+function auSlideSync(mode) {
+  const card = document.getElementById('auCard'); if (!card) return;
+  card.classList.toggle('au-signup', mode === 'signup');
+  const t = document.getElementById('auSlideTitle'), x = document.getElementById('auSlideText'), b = document.getElementById('auSlideBtn');
+  if (mode === 'signup') { t.textContent = 'Pehle se account hai?'; x.textContent = 'Login karein aur apni parhai wahin se jaari rakhein.'; b.textContent = 'Login'; }
+  else { t.textContent = 'Naye ho?'; x.textContent = 'Free account banayein aur 3 din saari cheezein free use karein.'; b.textContent = 'Sign up'; }
+}
 function setAuthMode(mode) {
-  authMode = mode;
+  authMode = mode; auSlideSync(mode);
   authError.style.display = 'none';
   const dict = translations[getCurrentLanguage()] || translations.roman;
   if (mode === 'login') {
@@ -3504,8 +3534,10 @@ function setAuthMode(mode) {
 }
 authTabLogin.addEventListener('click', () => setAuthMode('login'));
 authTabSignup.addEventListener('click', () => setAuthMode('signup'));
+document.getElementById('auSlideBtn').addEventListener('click', () => setAuthMode(authMode === 'login' ? 'signup' : 'login'));
 
 function showLoggedInView(email) {
+  try { document.getElementById('auCard').classList.remove('au-wide'); } catch (e) {}
   authLoggedOutView.style.display = 'none';
   authLoggedInView.style.display = 'block';
   const nm = rnDisplayName() || email;
@@ -3517,6 +3549,7 @@ function showLoggedInView(email) {
   authAvatarInitial.textContent = nm.charAt(0).toUpperCase();
 }
 function showLoggedOutView() {
+  try { document.getElementById('auCard').classList.add('au-wide'); } catch (e) {}
   authLoggedOutView.style.display = 'block';
   authLoggedInView.style.display = 'none';
   authForm.reset();
