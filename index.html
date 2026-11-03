@@ -1524,14 +1524,14 @@ h1,h2,h3,h4{ font-family:var(--font-body) !important; letter-spacing:-.02em; }
       <form id="authForm">
         <div id="authNameField" style="display:none;">
           <label data-i18n="authNameLabel" style="display:block; font-size:13px; font-weight:700; color:var(--text-dim); margin-bottom:8px;">Aapka naam</label>
-          <input type="text" id="authName" maxlength="30" autocomplete="given-name" data-i18n-placeholder="authNamePlaceholder" placeholder="Jaise: Ayesha" style="width:100%; background:var(--bg-soft); border:1.6px solid var(--border); border-radius:12px; padding:13px 15px; color:var(--text); font-size:14.5px; font-family:var(--font-body); margin-bottom:16px;" />
+          <input type="text" id="authName" maxlength="30" autocomplete="given-name" data-i18n-placeholder="authNamePlaceholder" placeholder="Full name" style="width:100%; background:var(--bg-soft); border:1.6px solid var(--border); border-radius:12px; padding:13px 15px; color:var(--text); font-size:14.5px; font-family:var(--font-body); margin-bottom:16px;" />
         </div>
 
         <label data-i18n="authEmailLabel" style="display:block; font-size:13px; font-weight:700; color:var(--text-dim); margin-bottom:8px;">Email</label>
-        <input type="email" id="authEmail" required placeholder="you@example.com" style="width:100%; background:var(--bg-soft); border:1.6px solid var(--border); border-radius:12px; padding:13px 15px; color:var(--text); font-size:14.5px; font-family:var(--font-body); margin-bottom:16px;" />
+        <input type="email" id="authEmail" required placeholder="Email address" style="width:100%; background:var(--bg-soft); border:1.6px solid var(--border); border-radius:12px; padding:13px 15px; color:var(--text); font-size:14.5px; font-family:var(--font-body); margin-bottom:16px;" />
 
         <label data-i18n="authPasswordLabel" style="display:block; font-size:13px; font-weight:700; color:var(--text-dim); margin-bottom:8px;">Password</label>
-        <div style="position:relative;"><input type="password" id="authPassword" autocomplete="current-password" required minlength="6" data-i18n-placeholder="authPasswordPlaceholder" placeholder="Kam se kam 6 characters" style="width:100%; background:var(--bg-soft); border:1.6px solid var(--border); border-radius:12px; padding:13px 52px 13px 15px; color:var(--text); font-size:14.5px; font-family:var(--font-body); margin-bottom:16px;" /><button type="button" id="authPwToggle" aria-label="Password dikhayein" title="Password dikhayein" style="position:absolute; right:10px; top:9px; width:34px; height:34px; display:grid; place-items:center; background:none; border:none; color:var(--text-dim); cursor:pointer; border-radius:8px;"><svg id="authPwEyeOn" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg><svg id="authPwEyeOff" style="display:none" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.9 10.9 0 0 1 12 19c-6.5 0-10-7-10-7a18.4 18.4 0 0 1 5.06-5.94M9.9 4.24A9.1 9.1 0 0 1 12 4c6.5 0 10 7 10 7a18.5 18.5 0 0 1-2.16 3.19M1 1l22 22"/><path d="M14.12 14.12A3 3 0 1 1 9.88 9.88"/></svg></button></div>
+        <div style="position:relative;"><input type="password" id="authPassword" autocomplete="current-password" required minlength="6" data-i18n-placeholder="authPasswordPlaceholder" placeholder="Password" style="width:100%; background:var(--bg-soft); border:1.6px solid var(--border); border-radius:12px; padding:13px 52px 13px 15px; color:var(--text); font-size:14.5px; font-family:var(--font-body); margin-bottom:16px;" /><button type="button" id="authPwToggle" aria-label="Password dikhayein" title="Password dikhayein" style="position:absolute; right:10px; top:9px; width:34px; height:34px; display:grid; place-items:center; background:none; border:none; color:var(--text-dim); cursor:pointer; border-radius:8px;"><svg id="authPwEyeOn" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg><svg id="authPwEyeOff" style="display:none" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.9 10.9 0 0 1 12 19c-6.5 0-10-7-10-7a18.4 18.4 0 0 1 5.06-5.94M9.9 4.24A9.1 9.1 0 0 1 12 4c6.5 0 10 7 10 7a18.5 18.5 0 0 1-2.16 3.19M1 1l22 22"/><path d="M14.12 14.12A3 3 0 1 1 9.88 9.88"/></svg></button></div>
 
         <div id="authClassField" style="display:none;">
           <label data-i18n="authClassLabel" style="display:block; font-size:13px; font-weight:700; color:var(--text-dim); margin-bottom:8px;">Aap kis class mein hain?</label>
@@ -1601,7 +1601,7 @@ const translations = {
     navProgress: 'Progress', navLeaderboard: 'Leaderboard', navFriends: 'Friends', navPricing: 'Pricing', navFaq: 'FAQ',
     navWaitlist: 'Join Waitlist',
     authTabLogin: 'Login', authTabSignup: 'Sign up',
-    authNameLabel: 'Your name', authNamePlaceholder: 'e.g. Ayesha', authEmailLabel: 'Email', authPasswordLabel: 'Password', authPasswordPlaceholder: 'At least 6 characters',
+    authNameLabel: 'Your name', authNamePlaceholder: 'Full name', authEmailLabel: 'Email', authPasswordLabel: 'Password', authPasswordPlaceholder: 'Password',
     authClassLabel: 'Which class are you in?', authClassPlaceholder: 'Select your class or level',
     authWelcomeBack: 'Welcome back!', authLogout: 'Logout',
     authFormTitleLogin: 'Login to your account', authFormTitleSignup: 'Create a new account',
@@ -1738,7 +1738,7 @@ const translations = {
     navProgress: 'پیش رفت', navLeaderboard: 'لیڈربورڈ', navFriends: 'دوست', navPricing: 'قیمت', navFaq: 'سوالات',
     navWaitlist: 'ویٹ لسٹ میں شامل ہوں',
     authTabLogin: 'لاگ ان', authTabSignup: 'سائن اپ',
-    authNameLabel: 'آپ کا نام', authNamePlaceholder: 'مثلاً: عائشہ', authEmailLabel: 'ای میل', authPasswordLabel: 'پاس ورڈ', authPasswordPlaceholder: 'کم از کم 6 حروف',
+    authNameLabel: 'آپ کا نام', authNamePlaceholder: 'پورا نام', authEmailLabel: 'ای میل', authPasswordLabel: 'پاس ورڈ', authPasswordPlaceholder: 'پاس ورڈ',
     authClassLabel: 'آپ کس کلاس میں ہیں؟', authClassPlaceholder: 'اپنی کلاس یا لیول منتخب کریں',
     authWelcomeBack: 'خوش آمدید!', authLogout: 'لاگ آؤٹ',
     authFormTitleLogin: 'اپنے اکاؤنٹ میں لاگ ان کریں', authFormTitleSignup: 'نیا اکاؤنٹ بنائیں',
@@ -1875,7 +1875,7 @@ const translations = {
     navProgress: 'Progress', navLeaderboard: 'Leaderboard', navFriends: 'Friends', navPricing: 'Pricing', navFaq: 'FAQ',
     navWaitlist: 'Waitlist join karein',
     authTabLogin: 'Login', authTabSignup: 'Sign up',
-    authNameLabel: 'Aapka naam', authNamePlaceholder: 'Jaise: Ayesha', authEmailLabel: 'Email', authPasswordLabel: 'Password', authPasswordPlaceholder: 'Kam se kam 6 characters',
+    authNameLabel: 'Aapka naam', authNamePlaceholder: 'Full name', authEmailLabel: 'Email', authPasswordLabel: 'Password', authPasswordPlaceholder: 'Password',
     authClassLabel: 'Aap kis class mein hain?', authClassPlaceholder: 'Class ya level select karein',
     authWelcomeBack: 'Khush amdeed!', authLogout: 'Logout',
     authFormTitleLogin: 'Apne account mein login karein', authFormTitleSignup: 'Naya account banayein',
