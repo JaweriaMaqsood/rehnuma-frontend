@@ -2057,6 +2057,7 @@ function applyLanguage(lang) {
   if (langLabelEl) langLabelEl.textContent = label;
   localStorage.setItem('nishaan_language', lang);
   try { rnTranslateAll(); } catch (e) {}
+  try { rnRefreshIntro(); } catch (e) {}
 }
 
 /* ===== Full-site language translator (Roman source -> English / Urdu) ===== */
@@ -2794,10 +2795,20 @@ function freshenIntro(msgs, subj) {
     const c = m.content.trim();
     const lang = INTRO_RE[1].test(c) ? 'en' : INTRO_RE[2].test(c) ? 'ur' : INTRO_RE[0].test(c) ? 'roman' : null;
     if (!lang) return;
-    const fresh = tutorIntroText(lang, subj);
+    const fresh = tutorIntroText(getCurrentLanguage(), subj);
     if (fresh && fresh !== m.content) msgs[i] = { role: 'assistant', content: fresh };
   });
   return msgs;
+}
+function rnRefreshIntro() {
+  if (currentSubject === 'general') return;
+  const fresh = tutorIntroText(getCurrentLanguage(), currentSubject);
+  if (!fresh) return;
+  const isIntro = (c) => typeof c === 'string' && INTRO_RE.some((re) => re.test(c.trim()));
+  let changed = false;
+  chatHistory.forEach((m, i) => { if (m && m.role === 'assistant' && isIntro(m.content) && m.content !== fresh) { chatHistory[i] = { role: 'assistant', content: fresh }; changed = true; } });
+  document.querySelectorAll('#chatMessages .chat-msg-tutor .chat-bubble-text').forEach((el) => { if (isIntro(el.textContent) && el.textContent.trim() !== fresh) el.textContent = fresh; });
+  if (changed) { try { persistChat(); } catch (e) {} }
 }
 function loadSavedChat(subj) { try { const a = JSON.parse(localStorage.getItem(chatStoreKey(subj))); return Array.isArray(a) ? freshenIntro(a, subj) : []; } catch (e) { return []; } }
 function chatTsKey(subj) { return 'nishaan_chat_ts_' + (localStorage.getItem('nishaan_user_id') || 'guest') + '_' + subj; }
@@ -2883,7 +2894,7 @@ function tutorIntroText(lang, subj) {
   const t = TUTORS[subj];
   if (subj === 'general') return null;
   if (lang === 'en') return "Hello! I'm " + t.name + ", your " + t.en + " teacher on Rehnuma. What would you like to learn today?";
-  if (lang === 'ur') return 'السلام علیکم! میں ' + t.name + ' ہوں، آپ کا ' + t.ur + ' کا ٹیوٹر۔ آج آپ کیا پڑھنا چاہتے ہیں؟';
+  if (lang === 'ur') return 'السلام علیکم! میں ' + (typeof RN_T === 'function' ? RN_T(t.name, 2) : t.name) + ' ہوں، آپ کا ' + t.ur + ' کا ٹیوٹر۔ آج آپ کیا پڑھنا چاہتے ہیں؟';
   return 'Assalam o Alaikum! Main ' + t.name + ' hoon, aapka ' + t.en + ' ka tutor. Aaj aap kya parhna chahte hain?';
 }
 
