@@ -4467,7 +4467,7 @@ function showView(name) {
   if (target === 'leaderboard') renderLeaderboard();
   if (target === 'friends' && FRIENDS_LIVE) renderChatSection();
   window.scrollTo(0, 0);
-  history.replaceState(null, '', '#' + navName);
+  try { history.replaceState(null, '', '#' + navName); } catch (e) {}
 }
 document.addEventListener('click', (e) => {
   const nav = e.target.closest('[data-nav]');
@@ -4826,7 +4826,7 @@ const INVITE_BASE = 'https://www.rehnuma-ai.com';
     if (!c) return;
     localStorage.setItem('rn_ref', c.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 8));
     const u = new URL(location.href); u.searchParams.delete('ref');
-    history.replaceState(null, '', u.pathname + (u.search || '') + u.hash);
+    try { history.replaceState(null, '', u.pathname + (u.search || '') + u.hash); } catch (e) {}
   } catch (e) { /* silent */ }
 })();
 async function tryClaimRef() {
