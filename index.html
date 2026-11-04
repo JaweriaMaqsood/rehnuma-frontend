@@ -2788,8 +2788,24 @@ let chatHistory = []; // [{role:'user'|'assistant', content:'...'}]
 function chatStoreKey(subj) { return 'nishaan_chat_' + (localStorage.getItem('nishaan_user_id') || 'guest') + '_' + subj; }
 // Purani saved chats mein tutor ka purana naam ho sakta hai: pehla intro maujooda naam se badal do
 const INTRO_RE = [/^Assalam o Alaikum! Main .{2,40}? hoon, aapka .{2,40}? ka tutor\. Aaj aap kya parhna chahte hain\?$/, /^Hello! I'm .{2,40}?, your .{2,40}? teacher on Rehnuma\. What would you like to learn today\?$/, /^السلام علیکم! میں .{2,40}? ہوں، آپ کا .{2,40}? کا ٹیوٹر۔ آج آپ کیا پڑھنا چاہتے ہیں؟$/];
+const GEN_GREET = {
+  en: { plain: "Hello! I'm Javeria, your study partner. Ask me any concept, or practice MCQs to find your weak areas.", weak: (t) => `Hello! Welcome back. Based on your practice, it looks like you could use a bit more work on "${t}" — want to start there, or ask me something else?` },
+  ur: { plain: "السلام علیکم! میں جویریہ ہوں، آپ کی اسٹڈی پارٹنر۔ کوئی بھی موضوع پوچھیں، یا MCQs پریکٹس کر کے اپنی کمزور جگہیں معلوم کریں۔", weak: (t) => `السلام علیکم! واپس آنے کا شکریہ۔ آپ کی پریکٹس سے پتا چلا ہے کہ "${t}" میں تھوڑی مشق درکار ہے — کیا ابھی اسی پر شروع کریں، یا کوئی اور سوال پوچھیں؟` },
+  roman: { plain: "Assalam o Alaikum! Main Javeria hoon, tumhari study partner. Koi bhi concept poocho, ya MCQs practice karke apni weak areas pata karo.", weak: (t) => `Assalam o Alaikum! Waapis aane ka shukriya. Tumhari practice se pata chala hai ke "${t}" mein thoda kaam chahiye — chaho to abhi isi pe shuru karein, ya koi aur sawal poocho?` },
+};
+function genGreetFresh(content, lang) {
+  const c = String(content || '').trim();
+  const L = ['en', 'ur', 'roman'];
+  for (const k of L) if (c === GEN_GREET[k].plain || c === GEN_GREET[k].plain.replace('جویریہ', 'جاویریا')) return GEN_GREET[lang].plain;
+  for (const k of L) {
+    const parts = GEN_GREET[k].weak('\u0000').split('\u0000');
+    if (c.startsWith(parts[0]) && c.endsWith(parts[1]) && c.length > parts[0].length + parts[1].length) return GEN_GREET[lang].weak(c.slice(parts[0].length, c.length - parts[1].length));
+  }
+  return null;
+}
 function freshenIntro(msgs, subj) {
-  if (subj === 'general' || !msgs.length) return msgs;
+  if (!msgs.length) return msgs;
+  if (subj === 'general') { msgs.forEach((m, i) => { if (m && m.role === 'assistant' && typeof m.content === 'string') { const f = genGreetFresh(m.content, getCurrentLanguage()); if (f && f !== m.content) msgs[i] = { role: 'assistant', content: f }; } }); return msgs; }
   msgs.forEach((m, i) => {
     if (!m || m.role !== 'assistant' || typeof m.content !== 'string') return;
     const c = m.content.trim();
@@ -2801,7 +2817,13 @@ function freshenIntro(msgs, subj) {
   return msgs;
 }
 function rnRefreshIntro() {
-  if (currentSubject === 'general') return;
+  if (currentSubject === 'general') {
+    let ch = false;
+    chatHistory.forEach((m, i) => { if (m && m.role === 'assistant') { const f = genGreetFresh(m.content, getCurrentLanguage()); if (f && f !== m.content) { chatHistory[i] = { role: 'assistant', content: f }; ch = true; } } });
+    document.querySelectorAll('#chatMessages .chat-msg-tutor .chat-bubble-text').forEach((el) => { const f = genGreetFresh(el.textContent, getCurrentLanguage()); if (f && f !== el.textContent.trim()) el.textContent = f; });
+    if (ch) { try { persistChat(); } catch (e) {} }
+    return;
+  }
   const fresh = tutorIntroText(getCurrentLanguage(), currentSubject);
   if (!fresh) return;
   const isIntro = (c) => typeof c === 'string' && INTRO_RE.some((re) => re.test(c.trim()));
