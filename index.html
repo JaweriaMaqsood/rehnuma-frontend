@@ -225,7 +225,7 @@ section{ position:relative; z-index:1; padding:100px 0; scroll-margin-top:88px; 
 .owner-card p{ color:var(--text-dim); line-height:1.8; margin:0 0 12px; font-size:15.5px; }
 .owner-card .owner-sign{ margin-top:18px; color:var(--text); font-weight:700; line-height:1.5; }
 .owner-card .owner-sign span{ display:block; font-weight:500; font-size:13px; color:var(--text-dim); }
-.owner-card a.owner-link{ color:var(--cyan); font-weight:700; cursor:pointer; text-decoration:underline; }
+.owner-card a.owner-link, .owner-card button.owner-link{ color:var(--cyan); font-weight:700; cursor:pointer; text-decoration:underline; background:none; border:0; padding:0; font:inherit; font-weight:700; }
 .owner-card{ position:relative; overflow:hidden; }
 .owner-card::before{ content:""; position:absolute; inset:0 0 auto 0; height:4px; background:var(--grad,linear-gradient(90deg,#ff2e9a,#00e5ff)); }
 .owner-top{ display:flex; align-items:center; gap:14px; margin-bottom:14px; }
@@ -820,7 +820,7 @@ h1,h2,h3,h4{ font-family:var(--font-body) !important; letter-spacing:-.02em; }
     </div>
     <div class="owner-card home-note" id="homeOwnerNote">
       <div class="owner-top"><div class="owner-av">J</div><div><span class="owner-eyebrow">JAVERIA KI TARAF SE &#128156;</span><h2>Assalam o Alaikum, My Dear Students,</h2></div></div>
-      <p>Agar aap ko yeh website use karte hue ya parhai karte hue kisi bhi qism ka masla pesh aaye, to bas <a class="owner-link">&ldquo;Problem batao&rdquo;</a> mein apni problem likh dein. InshaAllah main khud us masle ko hal karoongi, aur saath saath is AI tutor ko mazeed behtar banati rahoongi.</p>
+      <p>Agar aap ko yeh website use karte hue ya parhai karte hue kisi bhi qism ka masla pesh aaye, to bas <button type="button" class="owner-link">&ldquo;Problem batao&rdquo;</button> mein apni problem likh dein. InshaAllah main khud us masle ko hal karoongi, aur saath saath is AI tutor ko mazeed behtar banati rahoongi.</p>
       <p>Mujhe maloom hai ke abhi is mein kuch kamiyan hongi, jo InshaAllah main waqt ke saath saath poori kar doongi. InshaAllah hum is mein mazeed bohot si mazay mazay ki cheezein bhi add karenge.</p>
       <p>Aap se meri dil se request hai ke thora sabar aur tawun karein, aur apni tawajjo parhai par rakhein. Aap ki mehnat aur kamyabi hi meri sab se badi khushi hai.</p>
       <p>Shukriya.</p>
@@ -1423,7 +1423,7 @@ h1,h2,h3,h4{ font-family:var(--font-body) !important; letter-spacing:-.02em; }
         <div class="footer-col">
           <h5 data-i18n="footerCompany">Company</h5>
           <a href="/about.html" data-i18n="footerAbout">Hamare baray mein</a>
-          <a href="#" id="footerContact" data-i18n="footerContact">Contact</a>
+          <button type="button" id="footerContact" data-i18n="footerContact">Contact</button>
           <a href="/privacy.html">Privacy Policy</a>
           <a href="/terms.html">Terms of Use</a>
         </div>
