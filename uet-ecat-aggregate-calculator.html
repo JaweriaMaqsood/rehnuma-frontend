@@ -46,6 +46,7 @@ function f(x){return (Math.round(x*100)/100).toFixed(2)}
 function bad(m){var r=$('res');r.style.display='block';r.textContent=m;}
 $('go').onclick=function(){
  var mo=n('mo'),mt=n('mt'),fo=n('fo'),ft=n('ft'),to=n('to'),tt=n('tt'),wm=n('wm'),wf=n('wf'),wt=n('wt');
+ if(wm===0&&isNaN(mo)){mo=0;if(isNaN(mt))mt=1}
  if([mo,mt,fo,ft,to,tt].some(isNaN))return bad('Sab marks likhein.');
  if(mt<=0||ft<=0||tt<=0)return bad('Total marks 0 se zyada hon.');
  if(mo>mt||fo>ft||to>tt)return bad('Obtained marks total se zyada nahi ho sakte.');
@@ -54,11 +55,12 @@ $('go').onclick=function(){
  var r=$('res');r.style.display='block';
  r.innerHTML='Aap ka aggregate: '+f(tot)+'%<small>Matric '+f(a)+'% × '+wm+'% = '+f(a*wm/100)+' &nbsp;|&nbsp; FSc '+f(b)+'% × '+wf+'% = '+f(b*wf/100)+' &nbsp;|&nbsp; ECAT '+f(c)+'% × '+wt+'% = '+f(c*wt/100)+'</small>';
 };
+var pre=$('pre');if(pre)pre.onchange=function(){if(pre.value==='custom')return;var a=pre.value.split(',');$('wm').value=a[0];$('wf').value=a[1];$('wt').value=a[2];};
 $('rs').onclick=function(){['mo','fo','to'].forEach(function(i){$(i).value=''});$('res').style.display='none';};
 })();
 </script><h2>Aksar poochhe jane wale sawal</h2>
 <div class="box"><details><summary>ECAT aggregate ka formula kya hai?</summary><p>Aam tor par UET Lahore ke liye: Matric % × 0.17 + FSc % × 0.50 + ECAT % × 0.33 (total 100 me). Dusri engineering universities (jaise Taxila, Peshawar, NUST) ka weightage alag ho sakta hai.</p></details><details><summary>ECAT ke total marks kitne hote hain?</summary><p>Aam tor par ECAT 400 marks ka hota hai (100 MCQs, har ek ke 4). Jo is saal ka paper ho wahi total daalein.</p></details><details><summary>Kya ye final merit hai?</summary><p>Nahi, ye sirf andaza hai. Asal merit list ke liye apni university ka official notice dekhein.</p></details></div>
-<h2>Doosre calculators</h2><ul class="chips"><li><a href="/calculator.html">Scientific Calculator</a></li><li><a href="/percentage-calculator.html">Percentage Calculator</a></li><li><a href="/mdcat-aggregate-calculator.html">MDCAT Aggregate Calculator</a></li><li><a href="/gpa-cgpa-calculator.html">GPA / CGPA Calculator</a></li><li><a href="/calculators.html">Sab calculators</a></li></ul>
+<h2>Doosre calculators</h2><ul class="chips"><li><a href="/calculator.html">Scientific Calculator</a></li><li><a href="/percentage-calculator.html">Percentage Calculator</a></li><li><a href="/mdcat-aggregate-calculator.html">MDCAT Aggregate Calculator</a></li><li><a href="/uet-peshawar-aggregate-calculator.html">UET Peshawar Aggregate Calculator</a></li><li><a href="/gpa-cgpa-calculator.html">GPA / CGPA Calculator</a></li><li><a href="/calculators.html">Sab calculators</a></li></ul>
 <h2>Sawal samajh nahi aa raha?</h2>
 <p>Rehnuma AI tutor aap ko step by step samjhata hai, Urdu, Roman Urdu ya English me. Rehnuma Javeria Maqsood ne banaya hai.</p>
 <a class="cta" href="/">Rehnuma kholein: 3 din free</a>
