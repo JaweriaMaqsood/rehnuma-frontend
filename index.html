@@ -818,14 +818,6 @@ h1,h2,h3,h4{ font-family:var(--font-body) !important; letter-spacing:-.02em; }
       <div><span class="eyebrow">AAJ KI STUDY JOURNEY</span><h1 id="homeGreeting">Assalam o Alaikum!</h1><p>Har din ek simple tarteeb: samjho, practice karo, apni kamzori pakdo, phir agay barho.</p></div>
       <button type="button" class="btn btn-primary" id="homeLoginBtn">Login / Sign up</button>
     </div>
-    <div class="owner-card home-note" id="homeOwnerNote">
-      <div class="owner-top"><div class="owner-av">J</div><div><span class="owner-eyebrow">JAVERIA KI TARAF SE &#128156;</span><h2>Assalam o Alaikum, My Dear Students,</h2></div></div>
-      <p>Agar aap ko yeh website use karte hue ya parhai karte hue kisi bhi qism ka masla pesh aaye, to bas <button type="button" class="owner-link">&ldquo;Problem batao&rdquo;</button> mein apni problem likh dein. InshaAllah main khud us masle ko hal karoongi, aur saath saath is AI tutor ko mazeed behtar banati rahoongi.</p>
-      <p>Mujhe maloom hai ke abhi is mein kuch kamiyan hongi, jo InshaAllah main waqt ke saath saath poori kar doongi. InshaAllah hum is mein mazeed bohot si mazay mazay ki cheezein bhi add karenge.</p>
-      <p>Aap se meri dil se request hai ke thora sabar aur tawun karein, aur apni tawajjo parhai par rakhein. Aap ki mehnat aur kamyabi hi meri sab se badi khushi hai.</p>
-      <p>Shukriya.</p>
-      <div class="owner-sign">Javeria Maqsood<span>Founder, Rehnuma &middot; 20 saal</span></div>
-    </div>
     <div class="streak-card" id="streakCard">
       <div class="streak-main">
         <svg class="streak-flame" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c4 0 7-2.8 7-7 0-3-1.6-5-3-6.5-.4 1.4-1.3 2.2-2.2 2.5.4-3.2-1-6.3-3.8-8.5-.2 3.5-2 5.2-3.4 7C5.2 11.3 5 13 5 15c0 4.2 3 7 7 7Z"/></svg>
@@ -1423,7 +1415,7 @@ h1,h2,h3,h4{ font-family:var(--font-body) !important; letter-spacing:-.02em; }
         <div class="footer-col">
           <h5 data-i18n="footerCompany">Company</h5>
           <a href="/about.html" data-i18n="footerAbout">Hamare baray mein</a>
-          <button type="button" id="footerContact" data-i18n="footerContact">Contact</button>
+          <a href="/contact.html" id="footerContact" data-i18n="footerContact">Contact</a>
           <a href="/privacy.html">Privacy Policy</a>
           <a href="/terms.html">Terms of Use</a>
         </div>
@@ -5836,7 +5828,7 @@ async function grpPoll() {
 }
 document.getElementById('groupBtn').addEventListener('click', () => grpMenu());
 document.querySelectorAll('.owner-link').forEach((a) => a.addEventListener('click', () => document.getElementById('feedbackOpen').click()));
-document.getElementById('footerContact').addEventListener('click', (e) => { e.preventDefault(); document.getElementById('feedbackOpen').click(); });
+
 (function roomFromLink() {
   let code = ''; try { code = (new URLSearchParams(location.search).get('room') || '').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 6); } catch (e) {}
   if (code.length !== 6) return;
