@@ -265,21 +265,9 @@ section{ position:relative; z-index:1; padding:100px 0; scroll-margin-top:88px; 
 .faq-a p{ padding:0 22px 20px; color:var(--text-dim); font-size:14.5px; }
 
 
-.waitlist{ background:linear-gradient(135deg, #2A1650, #170D30); border:1.6px solid var(--border-strong); border-radius:32px; margin:0 32px; padding:64px 40px; text-align:center; position:relative; overflow:hidden; }
-.waitlist::before{ content:""; position:absolute; inset:0; background:radial-gradient(ellipse 60% 80% at 50% 0%, rgba(0,229,255,.16), transparent 70%); pointer-events:none; }
-.waitlist .wrap{ max-width:560px; position:relative; }
-.waitlist h2{ font-size:clamp(26px,3.2vw,36px); margin-bottom:14px; }
-.waitlist p{ color:var(--text-dim); font-size:15.5px; margin-bottom:30px; }
-.waitlist-form{ display:flex; gap:10px; max-width:420px; margin:0 auto; flex-wrap:wrap; justify-content:center; }
-.waitlist-form input{
   flex:1; min-width:200px; background:rgba(255,255,255,0.06); border:1.6px solid var(--border-strong);
   border-radius:999px; padding:14px 18px; color:var(--text); font-size:14.5px; font-family:var(--font-body);
 }
-.waitlist-form input::placeholder{ color:var(--text-faint); }
-.waitlist-form input:focus{ outline:none; border-color:var(--cyan); }
-.waitlist-note{ margin-top:16px; font-family:var(--font-mono); font-size:12px; color:var(--text-faint); }
-.waitlist-success{ display:none; font-size:15px; color:var(--lime); font-weight:700; }
-.waitlist-success.show{ display:block; }
 
 .site-footer{ padding:56px 0 32px; }
 .footer-top{ display:flex; align-items:flex-start; justify-content:space-between; gap:32px; flex-wrap:wrap; padding-bottom:32px; }
@@ -313,7 +301,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   section{ padding:64px 0; }
   .hero{ padding:40px 0 56px; }
   .tools-grid{ grid-template-columns:1fr; }
-  .waitlist{ margin:0 16px; padding:44px 24px; border-radius:24px; }
   .footer-top{ flex-direction:column; }
 }
 
@@ -329,6 +316,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .sb-item:hover{ background:rgba(255,255,255,.06); color:var(--text); }
 .sb-item.active{ background:var(--grad-soft); color:var(--text); box-shadow:inset 3px 0 0 var(--cyan); }
 .sb-item svg{ flex-shrink:0; }
+a.sb-item{ text-decoration:none; }
+.sb-new{ margin-left:auto; font-size:10px; font-weight:800; letter-spacing:.04em; padding:2px 7px; border-radius:999px; background:var(--cyan); color:#04101a; }
 .sb-sep{ height:1px; background:var(--border); margin:10px 4px; }
 main, .site-footer{ margin-left:var(--sbw); }
 .view{ display:none; }
@@ -768,7 +757,7 @@ h1,h2,h3,h4{ font-family:var(--font-body) !important; letter-spacing:-.02em; }
         </div>
       </div>
       <button type="button" class="btn btn-outline" id="authOpenBtn">Login / Sign up</button>
-      <a href="#waitlist" class="btn btn-primary" data-i18n="navWaitlist">Waitlist join karein</a>
+      <a href="/quiz.html" class="btn btn-primary" data-i18n="navQuiz">Quiz khelein</a>
     </div>
     <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
   </div>
@@ -790,7 +779,7 @@ h1,h2,h3,h4{ font-family:var(--font-body) !important; letter-spacing:-.02em; }
     <div class="mobile-nav-actions">
       <button type="button" class="btn btn-outline btn-block" id="authOpenBtnMobile">Login / Sign up</button>
     </div>
-    <div class="mobile-nav-actions"><a href="#waitlist" class="btn btn-primary btn-block" data-i18n="navWaitlist">Waitlist join karein</a></div>
+    <div class="mobile-nav-actions"><a href="/quiz.html" class="btn btn-primary btn-block" data-i18n="navQuiz">Quiz khelein</a></div>
   </div>
 </header>
 <aside class="sidebar" id="sidebar">
@@ -801,6 +790,7 @@ h1,h2,h3,h4{ font-family:var(--font-body) !important; letter-spacing:-.02em; }
   <button type="button" class="sb-item" data-nav="leaderboard"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4h8v5a4 4 0 0 1-8 0V4zM8 6H4v1a3 3 0 0 0 4 3M16 6h4v1a3 3 0 0 1-4 3M12 13v4M8 20h8"/></svg><span data-i18n="navLeaderboard">Leaderboard</span></button>
   <button type="button" class="sb-item" data-nav="friends"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 20v-1a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v1M10 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6M20 20v-1a3 3 0 0 0-2-2.8M16 5.2a3 3 0 0 1 0 5.6"/></svg><span data-i18n="navFriends">Friends</span></button>
   <button type="button" class="sb-item" data-nav="calc" id="calcOpen"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01M8 18h.01M12 18h.01M16 18h.01"/></svg><span data-i18n="navCalculators">Calculators</span></button>
+  <a class="sb-item" href="/quiz.html" id="quizOpen"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 .9-1 1.7M12 17h.01"/></svg><span data-i18n="navQuiz">Quiz khelein</span><span class="sb-new" data-i18n="navNew">Naya</span></a>
   <div class="sb-sep"></div>
   <button type="button" class="sb-item" data-nav="about"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8h.01M11 12h1v5h1M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z"/></svg><span data-i18n="navWhy">Kyun Rehnuma</span></button>
   <button type="button" class="sb-item" id="payOpen"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.5 6.6 19.5l1.2-6L3.3 9.3l6.1-.7z"/></svg><span>Premium</span></button>
@@ -828,6 +818,10 @@ h1,h2,h3,h4{ font-family:var(--font-body) !important; letter-spacing:-.02em; }
         <div class="goal-bar"><div id="goalFill"></div></div>
         <div class="week-dots" id="weekDots"></div>
       </div>
+    </div>
+    <div class="daily-card" id="quizCard">
+      <div><span class="daily-tag" data-i18n="quizTag">FREE QUIZ</span><b data-i18n="quizCardTitle">Rehnuma Quiz</b><span data-i18n="quizCardSub">Matric, FSc aur MDCAT ke MCQs. Foran jawab aur wajah, score dosto ko bhejo.</span></div>
+      <a class="btn btn-primary" href="/quiz.html" data-i18n="quizCardBtn">Quiz khelein</a>
     </div>
     <div class="daily-card" id="dailyCard">
       <div><span class="daily-tag">AAJ KA CHALLENGE</span><b id="dailyTopic">—</b><span id="dailySub">3 MCQs, 2 minute. Roz naya topic.</span></div>
@@ -876,7 +870,7 @@ h1,h2,h3,h4{ font-family:var(--font-body) !important; letter-spacing:-.02em; }
       <h1 data-i18n="heroTitle">Jahan raah bhatko,<br>wahi <span class="grad-text">rehnuma</span> mil jaye.</h1>
       <p class="hero-sub" data-i18n="heroSub">Rehnuma tumhara concept samjhata hai, MCQs practice karwata hai, aur bataata hai exactly kahan practice ki zaroorat hai — Primary se Entry Test (MDCAT/ECAT) tak, sab ek jagah.</p>
       <div class="hero-ctas">
-        <a href="#waitlist" class="btn btn-primary btn-lg" data-i18n="heroCta1">Waitlist mein shamil ho</a>
+        <a href="/quiz.html" class="btn btn-primary btn-lg" data-i18n="heroCta1">Free Quiz khelein</a>
         <a href="#demo" class="btn btn-outline btn-lg" data-i18n="heroCta2">Live demo try karo</a>
       </div>
       <p class="hero-note" data-i18n="heroNote">Abhi beta mein hai · First 500 logon ko 1 mahina free milega</p>
@@ -1292,7 +1286,7 @@ h1,h2,h3,h4{ font-family:var(--font-body) !important; letter-spacing:-.02em; }
     <div class="section-head center reveal">
       <span class="eyebrow" data-i18n="pricingEyebrow">Pricing</span>
       <h2 data-i18n="pricingTitle">Academy ke ek mahine se sasta</h2>
-      <p data-i18n="pricingSub">Launch ke waqt ye pricing hogi — waitlist walon ke liye pehla mahina free.</p>
+      <p data-i18n="pricingSub">Pehle 3 din free, phir apna plan chunein. Payment JazzCash se.</p>
     </div>
     <div class="pricing-grid">
       <div class="price-card reveal">
@@ -1333,7 +1327,7 @@ h1,h2,h3,h4{ font-family:var(--font-body) !important; letter-spacing:-.02em; }
     <div class="faq-list reveal">
       <div class="faq-item open">
         <button class="faq-q"><span data-i18n="faq1Q">Rehnuma kab launch hoga?</span><svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <div class="faq-a"><p data-i18n="faq1A">Hum abhi beta build kar rahe hain. Waitlist join karne walon ko sabse pehle access milega, launch date confirm hote hi email/SMS se pata chal jayega.</p></div>
+        <div class="faq-a"><p data-i18n="faq1A">Rehnuma abhi beta mein live hai: free plan aap abhi use kar sakte hain. Pro plan jald aa raha hai.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-q"><span data-i18n="faq2Q">Kaunsi classes ke liye hai?</span><svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -1347,23 +1341,6 @@ h1,h2,h3,h4{ font-family:var(--font-body) !important; letter-spacing:-.02em; }
         <button class="faq-q"><span data-i18n="faq4Q">Free trial mein kya milta hai?</span><svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <div class="faq-a"><p data-i18n="faq4A">Pehli dafa use karne par aap ko 3 din poora free milte hain. Us ke baad roz 3 free sawal milte hain, aur unlimited ke liye Premium plan hai: 1 mahina Rs 300, 3 mahine Rs 800, 1 saal Rs 2500. Payment JazzCash se hoti hai.</p></div>
       </div>
-    </div>
-  </div>
-</section>
-
-
-<section class="view" data-view="about" id="waitlist" style="padding-top:20px;">
-  <div class="waitlist reveal">
-    <div class="wrap">
-      <span class="eyebrow" style="justify-content:center;" data-i18n="waitlistEyebrow">Beta launching soon</span>
-      <h2 data-i18n="waitlistTitle">Sabse pehle try karne walon mein shamil ho</h2>
-      <p data-i18n="waitlistDesc">Apna email do — launch hote hi sabse pehle pata chalega, aur 1 mahina Pro free milega.</p>
-      <form class="waitlist-form" id="waitlistForm" action="https://formspree.io/f/mppaykaj" method="POST">
-        <input type="email" name="email" id="waitlistEmail" placeholder="you@example.com" aria-label="Email address" required />
-        <button type="submit" class="btn btn-primary" id="waitlistSubmitBtn" data-i18n="waitlistJoin">Waitlist join karo</button>
-      </form>
-      <p class="waitlist-success" id="waitlistSuccess">Shukriya! Aap waitlist mein shamil ho gaye hain. 🎉</p>
-      <p class="waitlist-note" data-i18n="waitlistNote">Koi spam nahi — sirf launch update.</p>
     </div>
   </div>
 </section>
@@ -1662,7 +1639,7 @@ const translations = {
   en: {
     navWhy: 'Why Rehnuma', navFeatures: 'Features', navSubjects: 'Subjects', navDemo: 'Live Demo',
     navProgress: 'Progress', navCalculators: 'Calculators', navLeaderboard: 'Leaderboard', navFriends: 'Friends', navPricing: 'Pricing', navFaq: 'FAQ',
-    navWaitlist: 'Join Waitlist',
+    navWaitlist: 'Join Waitlist', navQuiz: 'Play Quiz', navNew: 'New', quizTag: 'FREE QUIZ', quizCardTitle: 'Rehnuma Quiz', quizCardSub: 'MCQs for Matric, FSc and MDCAT. Instant answers and reasons, send your score to friends.', quizCardBtn: 'Play Quiz',
     authTabLogin: 'Login', authTabSignup: 'Sign up',
     authNameLabel: 'Your name', authNamePlaceholder: 'Full name', authEmailLabel: 'Email', authPasswordLabel: 'Password', authPasswordPlaceholder: 'Password',
     authClassLabel: 'Which class are you in?', authClassPlaceholder: 'Select your class or level',
@@ -1682,8 +1659,8 @@ const translations = {
     heroEyebrow: 'Every Class · Every Subject · AI Tutor',
     heroTitle: 'Wherever you lose your way,<br>that\'s where you\'ll find your <span class="grad-text">guide</span>.',
     heroSub: 'Rehnuma explains your concepts, gets you practicing with MCQs, and shows you exactly where you need more practice — from Primary all the way to Entry Test (MDCAT/ECAT), all in one place.',
-    heroCta1: 'Join the waitlist', heroCta2: 'Try the live demo',
-    heroNote: 'Currently in beta · First 500 people get 1 month free',
+    heroCta1: 'Play the free quiz', heroCta2: 'Try the live demo',
+    heroNote: 'Currently in beta · The quiz is free, no login needed',
     heroReportFlag: 'Focus on <strong>Electrostatics</strong> this week — your weakest topic.',
     problemEyebrow: 'The real problem', problemTitle: 'Tuition still feels like guesswork',
     compareOldLabel: 'The old way', compareOldTitle: 'Tuition academy + guess papers',
@@ -1742,7 +1719,7 @@ const translations = {
     buyPro: 'Get Premium', priceTry: 'Try now', payTitle: 'Pay with JazzCash', payAmt: 'Amount', payAcc: 'Account name', payNum: 'JazzCash number', payCopy: 'Copy number', payS1: 'Open your JazzCash app', payS2: 'Choose Send Money and paste this number', payS3: 'Send the amount shown above', payS4: 'After sending, tell us — we will turn on Pro for you', payNote: 'Pro will start after launch. Please wait for our announcement before paying.', payClose: 'Close',
     faqEyebrow: 'Questions & Answers',
     faq1Q: 'When will Rehnuma launch?',
-    faq1A: "We're currently building the beta. Waitlist members get access first — you'll hear by email/SMS as soon as the launch date is confirmed.",
+    faq1A: "Rehnuma is live in beta: you can use the free plan right now. The Pro plan is coming soon.",
     faq2Q: 'Which classes is it for?',
     faq2A: 'Rehnuma is for students of every level, from Primary (Class 1-5) to Entry Test prep (MDCAT/ECAT). Tell us your class when you sign up, and answers will match that level.',
     faq3Q: 'Is this a replacement for tuition/academy?',
@@ -1799,7 +1776,7 @@ const translations = {
   ur: {
     navWhy: 'رہنما کیوں', navFeatures: 'خصوصیات', navSubjects: 'مضامین', navDemo: 'لائیو ڈیمو',
     navProgress: 'پیش رفت', navCalculators: 'کیلکولیٹرز', navLeaderboard: 'لیڈربورڈ', navFriends: 'دوست', navPricing: 'قیمت', navFaq: 'سوالات',
-    navWaitlist: 'ویٹ لسٹ میں شامل ہوں',
+    navWaitlist: 'ویٹ لسٹ میں شامل ہوں', navQuiz: 'کوئز کھیلیں', navNew: 'نیا', quizTag: 'مفت کوئز', quizCardTitle: 'رہنما کوئز', quizCardSub: 'میٹرک، ایف ایس سی اور ایم ڈی کیٹ کے MCQs۔ فوراً جواب اور وجہ، اسکور دوستوں کو بھیجیں۔', quizCardBtn: 'کوئز کھیلیں',
     authTabLogin: 'لاگ ان', authTabSignup: 'سائن اپ',
     authNameLabel: 'آپ کا نام', authNamePlaceholder: 'پورا نام', authEmailLabel: 'ای میل', authPasswordLabel: 'پاس ورڈ', authPasswordPlaceholder: 'پاس ورڈ',
     authClassLabel: 'آپ کس کلاس میں ہیں؟', authClassPlaceholder: 'اپنی کلاس یا لیول منتخب کریں',
@@ -1819,8 +1796,8 @@ const translations = {
     heroEyebrow: 'ہر کلاس · ہر مضمون · اے آئی ٹیوٹر',
     heroTitle: 'جہاں راستہ بھٹک جاؤ،<br>وہیں <span class="grad-text">رہنما</span> مل جائے۔',
     heroSub: 'رہنما آپ کا تصور سمجھاتا ہے، MCQs کی پریکٹس کرواتا ہے، اور بتاتا ہے کہ بالکل کہاں پریکٹس کی ضرورت ہے — پرائمری سے انٹری ٹیسٹ (MDCAT/ECAT) تک، سب ایک جگہ۔',
-    heroCta1: 'ویٹ لسٹ میں شامل ہوں', heroCta2: 'لائیو ڈیمو آزمائیں',
-    heroNote: 'ابھی بیٹا میں ہے · پہلے 500 لوگوں کو 1 مہینہ مفت ملے گا',
+    heroCta1: 'مفت کوئز کھیلیں', heroCta2: 'لائیو ڈیمو آزمائیں',
+    heroNote: 'ابھی بیٹا میں ہے · کوئز مفت ہے، لاگ اِن کی ضرورت نہیں',
     heroReportFlag: 'اس ہفتے <strong>الیکٹروسٹیٹکس</strong> پر توجہ دیں — سب سے کمزور موضوع ہے۔',
     problemEyebrow: 'اصل مسئلہ', problemTitle: 'ٹیوشن اب بھی اندازے جیسی لگتی ہے',
     compareOldLabel: 'پرانا طریقہ', compareOldTitle: 'ٹیوشن اکیڈمی + گیس پیپر',
@@ -1879,7 +1856,7 @@ const translations = {
     buyPro: 'پریمیم لیں', priceTry: 'ابھی آزمائیں', payTitle: 'جاز کیش سے ادائیگی', payAmt: 'رقم', payAcc: 'اکاؤنٹ کا نام', payNum: 'جاز کیش نمبر', payCopy: 'نمبر کاپی کریں', payS1: 'اپنی جاز کیش ایپ کھولیں', payS2: 'Send Money چنیں اور یہ نمبر ڈالیں', payS3: 'اوپر دی گئی رقم بھیجیں', payS4: 'بھیجنے کے بعد ہمیں بتائیں، ہم آپ کا Pro چالو کر دیں گے', payNote: 'Pro لانچ کے بعد شروع ہوگا۔ ادائیگی سے پہلے ہمارے اعلان کا انتظار کریں۔', payClose: 'بند کریں',
     faqEyebrow: 'سوالات و جوابات',
     faq1Q: 'رہنما کب لانچ ہوگا؟',
-    faq1A: 'ہم ابھی بیٹا بنا رہے ہیں۔ ویٹ لسٹ میں شامل ہونے والوں کو سب سے پہلے رسائی ملے گی، لانچ ڈیٹ کنفرم ہوتے ہی ای میل/ایس ایم ایس سے پتا چل جائے گا۔',
+    faq1A: 'رہنما ابھی بیٹا میں لائیو ہے: فری پلان آپ ابھی استعمال کر سکتے ہیں۔ پرو پلان جلد آ رہا ہے۔',
     faq2Q: 'کونسی کلاسز کے لیے ہے؟',
     faq2A: 'رہنما پرائمری (کلاس 1-5) سے لے کر اینٹری ٹیسٹ کی تیاری (MDCAT/ECAT) تک، ہر لیول کے طلبہ کے لیے ہے۔ سائن اپ کرتے وقت اپنی کلاس بتائیں، جواب اسی لیول کے مطابق ملے گا۔',
     faq3Q: 'کیا یہ ٹیوشن/اکیڈمی کا متبادل ہے؟',
@@ -1936,7 +1913,7 @@ const translations = {
   roman: {
     navWhy: 'Kyun Rehnuma', navFeatures: 'Features', navSubjects: 'Subjects', navDemo: 'Live Demo',
     navProgress: 'Progress', navCalculators: 'Calculators', navLeaderboard: 'Leaderboard', navFriends: 'Friends', navPricing: 'Pricing', navFaq: 'FAQ',
-    navWaitlist: 'Waitlist join karein',
+    navWaitlist: 'Waitlist join karein', navQuiz: 'Quiz khelein', navNew: 'Naya', quizTag: 'FREE QUIZ', quizCardTitle: 'Rehnuma Quiz', quizCardSub: 'Matric, FSc aur MDCAT ke MCQs. Foran jawab aur wajah, score dosto ko bhejo.', quizCardBtn: 'Quiz khelein',
     authTabLogin: 'Login', authTabSignup: 'Sign up',
     authNameLabel: 'Aapka naam', authNamePlaceholder: 'Full name', authEmailLabel: 'Email', authPasswordLabel: 'Password', authPasswordPlaceholder: 'Password',
     authClassLabel: 'Aap kis class mein hain?', authClassPlaceholder: 'Class ya level select karein',
@@ -1956,8 +1933,8 @@ const translations = {
     heroEyebrow: 'Har Class · Har Subject · AI Tutor',
     heroTitle: 'Jahan raah bhatko,<br>wahi <span class="grad-text">rehnuma</span> mil jaye.',
     heroSub: 'Rehnuma tumhara تصور samjhata hai, MCQs practice karwata hai, aur bataata hai exactly kahan practice ki zaroorat hai — Primary se Entry Test (MDCAT/ECAT) tak, sab ek jagah.',
-    heroCta1: 'Waitlist mein shamil ho', heroCta2: 'Live demo try karo',
-    heroNote: 'Abhi beta mein hai · First 500 logon ko 1 mahina free milega',
+    heroCta1: 'Free Quiz khelein', heroCta2: 'Live demo try karo',
+    heroNote: 'Abhi beta mein hai · Quiz free hai, login ki zaroorat nahi',
     heroReportFlag: 'Is hafte <strong>Electrostatics</strong> par focus karo — sabse weak topic hai.',
     problemEyebrow: 'Asal masla', problemTitle: 'Tuition abhi bhi guess-work jaisi lagti hai',
     compareOldLabel: 'Purana tareeqa', compareOldTitle: 'Tuition academy + Guess paper',
@@ -2016,7 +1993,7 @@ const translations = {
     buyPro: 'Premium lein', priceTry: 'Abhi try karein', payTitle: 'JazzCash se payment', payAmt: 'Raqam', payAcc: 'Account ka naam', payNum: 'JazzCash number', payCopy: 'Number copy karo', payS1: 'Apni JazzCash app kholo', payS2: 'Send Money chuno aur ye number daalo', payS3: 'Upar likhi raqam bhejo', payS4: 'Bhejne ke baad hamein batao, hum aapka Pro on kar denge', payNote: 'Pro launch ke baad shuru hoga. Payment se pehle hamare ailaan ka intezar karo.', payClose: 'Band karo',
     faqEyebrow: 'Sawal jawab',
     faq1Q: 'Rehnuma kab launch hoga?',
-    faq1A: 'Rehnuma abhi beta mein live hai: free plan aap abhi use kar sakte hain. Pro plan jald aa raha hai, aur waitlist walon ko sabse pehle milega.',
+    faq1A: 'Rehnuma abhi beta mein live hai: free plan aap abhi use kar sakte hain. Pro plan jald aa raha hai.',
     faq2Q: 'Kaunsi classes ke liye hai?',
     faq2A: 'Rehnuma Primary (Class 1-5) se lekar Entry Test prep (MDCAT/ECAT) tak, har level ke students ke liye hai. Sign up karte waqt apni class batao, jawab usi level ke mutabiq milega.',
     faq3Q: 'Kya ye tuition/academy ka replacement hai?',
@@ -4461,53 +4438,6 @@ renderChatSection();
 
 renderProgressSection();
 initSubjectChat();
-
-const waitlistForm = document.getElementById('waitlistForm');
-const waitlistSuccess = document.getElementById('waitlistSuccess');
-
-// If this student already joined before (saved in this browser), hide the form on load
-if (localStorage.getItem('nishaan_waitlist_joined') === 'true') {
-  const wlDict0 = translations[getCurrentLanguage()] || translations.roman;
-  waitlistForm.style.display = 'none';
-  waitlistSuccess.textContent = wlDict0.waitlistAlready;
-  waitlistSuccess.style.color = '';
-  waitlistSuccess.classList.add('show');
-}
-
-waitlistForm.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const wlDict = translations[getCurrentLanguage()] || translations.roman;
-  const submitBtn = waitlistForm.querySelector('button[type="submit"]');
-  submitBtn.disabled = true;
-  submitBtn.textContent = wlDict.waitlistSending;
-  try {
-    const res = await fetch(waitlistForm.action, {
-      method: 'POST',
-      body: new FormData(waitlistForm),
-      headers: { 'Accept': 'application/json' }
-    });
-    if (res.ok) {
-      localStorage.setItem('nishaan_waitlist_joined', 'true');
-      waitlistForm.style.display = 'none';
-      waitlistSuccess.textContent = wlDict.waitlistSuccess;
-      waitlistSuccess.style.color = '';
-      waitlistSuccess.classList.add('show');
-    } else {
-      submitBtn.disabled = false;
-      submitBtn.textContent = wlDict.waitlistJoin;
-      waitlistSuccess.textContent = wlDict.waitlistError;
-      waitlistSuccess.style.color = '#FF2E9A';
-      waitlistSuccess.classList.add('show');
-    }
-  } catch (err) {
-    submitBtn.disabled = false;
-    submitBtn.textContent = wlDict.waitlistJoin;
-    waitlistSuccess.textContent = wlDict.waitlistNetError;
-    waitlistSuccess.style.color = '#FF2E9A';
-    waitlistSuccess.classList.add('show');
-  }
-});
-
 
 // ============ App navigation (sidebar views) ============
 const VIEW_ALIAS = { practice: 'study', chat: 'friends', demo: 'study', top: 'home' };
